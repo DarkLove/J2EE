@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fu.style.dao.IUserDao">
+
+    <resultMap id="UserBaseMap" type="com.fu.style.model.User">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectUserById" parameterType="int" resultMap="UserBaseMap">
+        SELECT * FROM user
+        WHERE id = #{id}
+    </select>
+
+    <insert id="addUser" parameterType="com.fu.style.model.User">
+        insert into user(name,password) values(#{name},#{password})
+    </insert>
+
+    <update id="updateUser" parameterType="com.fu.style.model.User">
+        update user set name=#{name},password=#{password} where id=#{id}
+    </update>
+
+    <!-- 删除用户(Remove) -->
+    <delete id="deleteUser" parameterType="int">
+        delete from user where id=#{id}
+    </delete>
+</mapper>
